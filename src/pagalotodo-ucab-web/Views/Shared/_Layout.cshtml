@@ -1,0 +1,256 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - UCABPagaloTodoWeb</title>
+  
+    <!-- Google Fonts -->
+    @Html.Raw("<link href=\"https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i\" rel=\"stylesheet\" type=\"text/css\" />")
+
+    <!-- Vendor CSS Files -->
+    <link href="~/lib/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="~/lib/vendor/aos/aos.css" rel="stylesheet">
+    <link href="~/lib/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/lib/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/lib/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/lib/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="~/lib/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="~/lib/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="~/css/style.css" rel="stylesheet">
+
+    <!-- DAtatables -->
+
+</head>
+
+<body>
+   <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center">
+
+            <h1 class="logo me-auto"><a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"><span>Pagalotodo</span>UCAB</a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="~/img/logo.png" alt="" class="img-fluid"></a>-->
+
+            <nav id="navbar" class="navbar order-last order-lg-0">
+               
+                @if (ViewContext.HttpContext.Request.Cookies["Token"] != null &&
+                ViewContext.HttpContext.Request.Cookies["TokenRole"] == "CONSUMIDOR")
+                {
+                    <ul>
+                        <li>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#"><span> Mi Cuenta</span> <i class="bi bi-chevron-down"></i></a>
+                            <ul>
+                                <li> <a class="nav-link text-dark" asp-area="" asp-controller="Consumidor" asp-action="ConsultarConsumidorPorID" asp-route-Id="@ViewContext.HttpContext.Request.Cookies["TokenId"]">Pagos Realizados</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#"><span>Servicios</span> <i class="bi bi-chevron-down"></i></a>
+                            <ul>
+                                <li> <a class="nav-link text-dark" asp-area="" asp-controller="Servicio" asp-action="GestionServicios">Servicios Disponibles</a></li>
+                                <li> <a class="nav-link text-dark" asp-area="" asp-controller="Pago" asp-action="InterfazRegistrar">Realizar Pago</a></li>
+                               
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#"><span>About</span> <i class="bi bi-chevron-down"></i></a>
+                            <ul>
+                                <li><a href="#">About Us</a></li>
+                                <li>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Team">Equipo</a>
+                                </li>
+                                <li><a class="nav-link text-dark" href="#">Contactanos</a></li>
+
+                            </ul>
+                        </li>
+
+                    </ul>
+                    <i class="bi bi-list mobile-nav-toggle"></i>
+                }else @if (ViewContext.HttpContext.Request.Cookies["Token"] != null &&
+                ViewContext.HttpContext.Request.Cookies["TokenRole"] == "ADMINISTRADOR")
+                {
+                    <ul>
+                        <li>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        
+                        <li class="dropdown">
+                            <a href="#"><span>Consumidores</span> <i class="bi bi-chevron-down"></i></a>
+                            <ul>
+                                <li> <a class="nav-link text-dark" asp-area="" asp-controller="Consumidor" asp-action="InterfazRegistrar">Registrar Consumidor</a></li>
+                                <li> <a class="nav-link text-dark" asp-area="" asp-controller="Consumidor" asp-action="GestionConsumidores">Gestionar consumidores</a></li>
+                            
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#"><span>Prestadores</span> <i class="bi bi-chevron-down"></i></a>
+                            <ul>
+                                <li> <a class="nav-link text-dark" asp-area="" asp-controller="PrestadorServicio" asp-action="InterfazRegistrar">Registrar Prestador de Servicio</a></li>
+                                <li> <a class="nav-link text-dark" asp-area="" asp-controller="PrestadorServicio" asp-action="GestionPrestadores">Gestionar Prestadores</a></li>
+                                    <li class="dropdown">
+                                    <a href="#"><span>Servicios</span> <i class="bi bi-chevron-right nav-link text-dark"></i></a>
+                                        <ul>
+                                        <li> <a class="nav-link text-dark" asp-area="" asp-controller="Servicio" asp-action="InterfazRegistrar">Registrar Servicio</a></li>
+                                                                              
+                                        </ul>
+                                    </li>
+                            </ul>
+                        </li>
+                  
+                        @*<li class="dropdown">
+                            <a href="#"><span>Administrador</span> <i class="bi bi-chevron-down"></i></a>
+                            <ul>
+                                <li> <a class="nav-link text-dark" asp-area="" asp-controller="Administrador" asp-action="ConfigurarOpcionPago">Configurar Opcion</a></li>
+                            </ul>
+                        </li>*@
+                        <li class="dropdown">
+                            <a href="#"><span>Servicios</span> <i class="bi bi-chevron-down"></i></a>
+                            <ul>
+                                <li> <a class="nav-link text-dark" asp-area="" asp-controller="Servicio" asp-action="GestionServicios">Servicios Disponibles</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#"><span>About</span> <i class="bi bi-chevron-down"></i></a>
+                            <ul>
+                                <li><a href="#">About Us</a></li>
+                                <li>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Team">Equipo</a>
+                                </li>
+                                <li><a class="nav-link text-dark" href="#">Contactanos</a></li>
+
+                            </ul>
+                        </li>
+
+                    </ul>
+                    <i class="bi bi-list mobile-nav-toggle"></i>
+                }else @if (ViewContext.HttpContext.Request.Cookies["Token"] != null &&
+                ViewContext.HttpContext.Request.Cookies["TokenRole"] == "PRESTADORSERVICIO")
+                {
+                    <ul>
+                        <li>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#"><span> Mi Cuenta</span> <i class="bi bi-chevron-down"></i></a>
+                            <ul>
+                                <li> <a class="nav-link text-dark" asp-area="" asp-controller="PrestadorServicio" asp-action="ConsultarPrestadorPorID" asp-route-Id="@ViewContext.HttpContext.Request.Cookies["TokenId"]">Detalle</a></li>
+                            </ul>
+                        </li>
+                                                
+                        <li class="dropdown">
+                            <a href="#"><span>About</span> <i class="bi bi-chevron-down"></i></a>
+                            <ul>
+                                <li><a href="#">About Us</a></li>
+                                <li>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Team">Equipo</a>
+                                </li>
+                                <li><a class="nav-link text-dark" href="#">Contactanos</a></li>
+
+                            </ul>
+                        </li>
+
+                    </ul>
+                    <i class="bi bi-list mobile-nav-toggle"></i>
+                }
+                else
+                {
+                   <ul>
+
+                    <li>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li> <a class="nav-link text-dark" asp-area="" asp-controller="Consumidor" asp-action="InterfazRegistrar">Registrate</a></li>
+                         <li class="dropdown">
+                            <a href="#"><span>About</span> <i class="bi bi-chevron-down"></i></a>
+                            <ul>
+                                <li><a href="#">About Us</a></li>
+                                <li>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Team">Equipo</a>
+                                </li>
+                                <li><a class="nav-link text-dark" href="#">Contactanos</a></li>
+
+                            </ul>
+                        </li>
+
+                        <i class="bi bi-list mobile-nav-toggle"></i>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                   </ul>
+                }
+            </nav><!-- .navbar -->
+            <!-- Mostrar botón de cierre de sesión si el usuario ha iniciado sesión -->
+            @if (ViewContext.HttpContext.Request.Cookies["Token"] != null)
+            {
+            <div class="col-md-6">
+                    <form class="mx-1 mx-md-4" asp-controller="Usuario" asp-action="Logout" method="post">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-danger delete-user btn-sm">
+                            Cerrar sesión
+                        </button>
+                    </div>
+                </form>
+            </div>
+            }else{
+
+            <div class="col-md-6">
+                    <form class="mx-1 mx-md-4" asp-controller="Usuario" asp-action="InterfazLogin" method="post">
+                    <div class="form-group">
+                            <button type="submit" class="btn btn-info btn-sm">
+                            Iniciar Sesión
+                        </button>
+                    </div>
+                </form>
+            </div> 
+            }
+            <!---->
+        </div>
+   </header><!-- End Header -->
+    <br />
+    <div>
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+
+        <div class="container d-md-flex py-4">
+
+            <div class="me-md-auto text-center text-md-start">
+                <div class="copyright">
+                    &copy; Copyright <strong><span>EquipoB</span></strong>. All Rights Reserved
+                </div>
+                <div class="credits">
+                   EQUIPO B
+                </div>
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+  
+
+    <script src="~/lib/vendor/aos/aos.js" asp-append-version="true"></script>
+    <script src="~/lib/vendor/bootstrap/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
+    <script src="~/lib/vendor/glightbox/js/glightbox.min.js" asp-append-version="true"></script>
+    <script src="~/lib/vendor/isotope-layout/isotope.pkgd.min.js" asp-append-version="true"></script>
+    <script src="~/lib/vendor/swiper/swiper-bundle.min.js"asp-append-version="true"></script>
+    <script src="~/lib/vendor/waypoints/noframework.waypoints.js" asp-append-version="true"></script>
+    <script src="~/lib/vendor/php-email-form/validate.js" asp-append-version="true"></script>
+
+    <!-- Template Main JS File -->
+    <script src="~/js/main.js"></script>
+
+
+    <!-- Datatables -->
+   
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+

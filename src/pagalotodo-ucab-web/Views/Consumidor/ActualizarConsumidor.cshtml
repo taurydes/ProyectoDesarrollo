@@ -1,0 +1,131 @@
+﻿@model UCABPagaloTodoWeb.Models.ConsumidorModel
+@{
+    ViewData["Title"] = "ActualizarConsumidor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/css/RegisterConsumidor.css"/>
+
+
+<section id="section" class="pb-4">
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-12 col-xl-11">
+                <div class="card text-black" id="fondo" style="border-radius: 25px;">
+                    <div class="card-body p-md-5">
+                        <div class="row justify-content-center">
+                            <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Actualizar Consumidor!</p>
+
+                               
+                                <form class="mx-1 mx-md-4" asp-action="ActualizarConsumidor" asp-route-id="@Model.Id" method="post">
+                                  
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="nombre">Nombre</label>
+                                            <input type="text" id="nombre" name="Nombre" class="form-control" required pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{2,50}" title="El nombre debe contener solo letras y tener una longitud de entre 2 y 50 caracteres."
+                                                   value="@Model.Nombre" />
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="apellido">Apellido</label>
+                                            <input type="text" id="apellido" name="Apellido" class="form-control" required pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{2,50}" title="El apellido debe contener solo letras y tener una longitud de entre 2 y 50 caracteres." 
+                                                   value="@Model.Apellido" />
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="NombreUsuario">Nombre de usuario</label>
+                                            <input type="text" id="NombreUsuario" name="NombreUsuario" class="form-control" required pattern="[a-zA-Z0-9_-]{4,16}" title="El nombre de usuario debe tener entre 4 y 16 caracteres y solo puede contener letras, números, guiones bajos y guiones."
+                                            value="@Model.NombreUsuario" />
+
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="Correo">Email</label>
+                                            <input type="email" id="Correo" name="Correo" class="form-control" required title="El correo debe ser válido."
+                                            value="@Model.Correo" />
+
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="Telefono">Telefono</label>
+                                            <input type="text" id="Telefono" name="Telefono" class="form-control" required pattern="\d{3}" title="El teléfono debe tener 3 dígitos."
+                                                   value="@Model.Telefono" />
+
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="Direccion">Direccion</label>
+                                            <input type="text" id="Direccion" name="Direccion" class="form-control" maxlength="100" title="La dirección debe tener una longitud máxima de 100 caracteres."
+                                                   value="@Model.Direccion" />
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="ClaveVieja">Clave Anterior</label>
+                                            <input type="Text" readonly id="ClaveVieja" name="ClaveVieja" class="form-control" value="@Model.Clave" />
+                                         </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="Clave">Password</label>
+                                            <input type="password" id="Clave" name="Clave" class="form-control" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$" title="La clave debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número." />
+
+                                        </div>
+                                    </div>
+
+                                    <input type="hidden" name="Id" value="@Model.Id" /> @*Importante xq es el que envía el ID*@
+
+                                    <div class="form-check d-flex justify-content-center mb-5">
+                                        <input class="form-check-input me-2" type="checkbox" value="" id="terms" />
+                                        <label class="form-check-label" for="terms">
+                                            Yo estoy de acuerdo con todos los <a href="#!">Terminos y condiciones</a>
+                                        </label>
+                                    </div>
+
+                                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                        <button type="submit" class="btn btn-primary btn-lg">Actualizar</button>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                            <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                                     class="img-fluid" alt="Sample image">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+

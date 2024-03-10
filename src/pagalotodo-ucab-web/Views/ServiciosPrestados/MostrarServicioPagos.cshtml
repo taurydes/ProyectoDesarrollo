@@ -1,0 +1,354 @@
+﻿@model UCABPagaloTodoWeb.Models.ServicioModel
+
+@{
+    ViewData["Title"] = "MostrarServicioPagos";
+}
+<div class="container">
+    <br />
+    <br />
+    <br />
+    <br />
+    <h1>Gestión Servicios Asociados</h1>
+    <br />
+
+    <!-- INICIO DE TABLA DE DATOS -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">NOMBRE</th>
+                <th scope="col">COSTO</th>
+                <th scope="col">DISPONIBILIDAD</th>
+                <th scope="col">TIPO PAGO</th>
+                <th scope="col">INFORMACIÓN</th>
+                <th scope="col">CONFIGURACIÓN PAGO</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col">OPCIONES</th>
+                <th scope="col"></th>
+
+
+            </tr>
+        </thead>
+        @if (Model == null)
+        {
+            <tr>
+                <h2>
+                    No se encuentra el Servicio.
+                </h2>
+            </tr>
+        }
+        else
+        {
+            @if (Model == null)
+            {
+                <tr>
+                    <h2>
+                        El Servicio no ha recibido ningun Pago.
+                    </h2>
+                </tr>
+            }
+            else
+            {
+                  <tr>
+                        <td>
+                            @Html.DisplayFor(i => @Model.Nombre)
+                        </td>
+                        <td>
+                        @Html.DisplayFor(i => @Model.Costo) $
+                        </td>
+                        <td>
+                        @if (@Model.EstadoServicio == "pronto")
+                            {
+                                <span>Proximamente</span>
+                            }
+                            else
+                            {
+                            @Html.DisplayFor(i => @Model.EstadoServicio)
+                            }
+
+                        </td>
+                        <td>
+                        @if (@Model.TipoPago)
+                            {
+                                <span>Por Confirmación</span>
+                            }
+                            else
+                            {
+                                <span>Directo</span>
+                            }
+                        </td>
+
+                        <td>
+                            <div class="col-md-6">
+                            <form class="mx-1 mx-md-4" asp-controller="Servicio" asp-action="ConsultarServicioPorID" asp-route-id="@Model.Id" method="get">
+                                    <input type="hidden" name="tipo" value="1" />
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-info btn-sm">
+                                            Información
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </td> 
+                        
+                        <td>
+                            <div class="col-md-6">
+                            <form class="mx-1 mx-md-4" asp-controller="Servicio" asp-action="ConsultarServicioPorID" asp-route-id="@Model.Id" method="get">
+                                    <input type="hidden" name="tipo" value="4" />
+                                    <div class="form-group">
+                                    <button type="submit" class="btn btn-success btn-sm">
+                                            Ver 
+                                    </button>
+                                    </div>
+                            </form>
+                            </div>
+
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            <div class="col-md-6">
+                            <form class="mx-1 mx-md-4" asp-controller="ArchivoConciliacion" asp-action="InterfazConfigurar" asp-route-id="@Model.Id" method="get">
+                                <input type="hidden" name="ServicioPrestadoId" value="@Model.Id" />
+                                    <div class="form-group">
+                                    <button type="submit" class="btn btn-warning btn-sm">
+                                            Descargar Pagos
+                                    </button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </td>
+
+                        <td>
+                            <div class="col-md-6">
+                            <form class="mx-1 mx-md-4" asp-controller="ArchivoConciliacion" asp-action="InterfazArchivo" asp-route-id="@Model.Id" method="get">
+                                    <input type="hidden" name="ServicioPrestadoId" value="@Model.Id" />
+                                    <div class="form-group">
+                                    <button type="submit" class="btn btn-warning btn-sm">
+                                            Subir Pagos Revisados
+                                    </button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </td>
+
+                        <td>
+                            <div class="col-md-6">
+                                <form class="mx-1 mx-md-4" asp-controller="ArchivoConciliacion" asp-action="InterfazConfigurarAprobado" asp-route-id="@Model.Id" method="get">
+                                    <input type="hidden" name="ServicioPrestadoId" value="@Model.Id" />
+                                    <div class="form-group">
+                                    <button type="submit" class="btn btn-warning btn-sm">
+                                            Generar Conciliacion
+                                    </button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </td>
+                    </tr>
+                }
+            }
+    </table>
+    <br />
+    <br />
+    <h1>Pagos Recibidos</h1>
+    <br />
+    <br />
+    <table class="table" id="tabla-pagos">
+        @if (Model == null)
+        {
+            <tr>
+                <h2>
+                    No se encuentra el Consumidor de Servicios.
+                </h2>
+            </tr>
+        }
+        else
+        {
+            var nombresCamposUnicos = new List<string>();
+            foreach (var pago in Model.PagosPorServicioRealizados)
+            {
+                foreach (var campos in pago.CamposPago)
+                {
+                    if (!nombresCamposUnicos.Contains(campos.NombreCampo))
+                {
+                        nombresCamposUnicos.Add(campos.NombreCampo);
+                }
+                    
+                }
+            }
+
+            @if (Model.PagosPorServicioRealizados == null)
+            {
+                <tr>
+                    <h2>
+                        El consumidor no ha realizado ningún pago.
+                    </h2>
+                </tr>
+            }
+            else
+            {
+                <table class="table" id="tabla-campos">
+                    <thead>
+                        <tr>
+                            @foreach (var nombreCampo in nombresCamposUnicos)
+                            {
+                                <th>
+                                    @nombreCampo
+                                </th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var pago in Model.PagosPorServicioRealizados)
+                        {
+                            <tr>
+                                @foreach (var nombreCampo in nombresCamposUnicos)
+                                {
+                                    var campoPago = pago.CamposPago.FirstOrDefault(c => c.NombreCampo == nombreCampo);
+                                    if (campoPago != null)
+                                    {
+                                        <td>
+                                            @campoPago.Valor
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td></td>
+                                    }
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        }
+    </table>
+    <br />
+    <br />
+    <h1>Archivos Conciliacion Generados</h1>
+    <br />
+    <br />
+    <!-- INICIO DE TABLA DE DATOS -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">REFERENCIA</th>
+                <th scope="col">FECHA GENERADO</th>
+                <th scope="col">ESTADO</th>
+                <th scope="col">URL</th>
+                <th scope="col">OPCIONES</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        @if (Model == null)
+        {
+            <tr>
+                <h2>
+                    No se encuentra el Servicio.
+                </h2>
+            </tr>
+        }
+        else
+        {
+            @if (Model.ArchivosPertenecientes == null)
+            {
+                <tr>
+                    <h2>
+                        El Servicio no ha recibido ningun Pago.
+                    </h2>
+                </tr>
+            }
+            else
+            {
+                    @foreach (var item in Model.ArchivosPertenecientes)
+                    {
+                        <tr>
+                            <td>
+                                @item.Id
+                            </td>
+                            <td>
+                                @item.CreatedAt.ToString("d")
+                            </td>
+                            <td>
+                                @if (@item.Confirmado)
+                                {
+                                    <span>Confirmado</span>
+                                }
+                                else
+                                {
+                                      <span>Rechazado</span>
+                                }
+                                
+                            </td>
+                            <td>
+                                <a href="@item.UrlDescarga"> Link de Descarga </a>
+                            </td>
+                            <td>
+                                <div class="col-md-6">
+                                    <form class="mx-1 mx-md-4" asp-controller="ArchivoConciliacion" asp-action="CambiarStatus" method="get">
+                                        <input type="hidden" name="Id" value="@item.Id" />
+                                        <input type="hidden" name="ServicioPrestadoId" value="@Model.Id" />
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-danger" btn-sm">
+                                                Estatus 
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+               
+            }
+        }
+        </tbody>
+    </table>
+    <br />
+    <br />
+    <br />
+
+
+</div>
+
+<!-- Agrega la hoja de estilos de DataTables -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css" />
+<link rel="stylesheet" type="text/css" href="~/lib/DataTables-1.13.4/css/jquery.dataTables.min.css" />
+
+<!-- Agrega la biblioteca de DataTables -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/lib/DataTables-1.13.4/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>
+
+@section Scripts {
+
+    <script>
+        $(document).ready(function () {
+            $('#tabla-pagos').DataTable({
+                searching: true,
+                ordering: true,
+                paging: true,
+                language: {
+                    search: "Filtrar registros:",
+                    lengthMenu: "Mostrar _MENU_ registros por página",
+                    zeroRecords: "No se encontraron registros",
+                    info: "Mostrando página _PAGE_ de _PAGES_",
+                    infoEmpty: "No hay registros disponibles",
+                    infoFiltered: "(filtrado de _MAX_ registros totales)"
+                }
+            });
+
+            $('#filter-form').submit(function (event) {
+                event.preventDefault();
+                var startDate = $('#start-date').val();
+                var endDate = $('#end-date').val();
+                $('#tabla-pagos').DataTable().columns(4).search(startDate + ' to ' + endDate).draw();
+            });
+        });
+    </script>
+}

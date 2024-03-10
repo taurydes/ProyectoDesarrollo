@@ -1,0 +1,78 @@
+﻿@model UCABPagaloTodoWeb.Models.ConfiguracionArchivoConciliacionModel
+
+@{
+    ViewData["Title"] = "ConfiguracionConciliacion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-lg">
+                <div class="card-body p-5">
+
+                    <h2 class="card-title text-center mb-5">Configurar Archivo Conciliacion</h2>
+                    @if (Model.PagosPorServicioRealizados != null && Model.PagosPorServicioRealizados.Any())
+                    {
+                        <form asp-controller="ArchivoConciliacion" asp-action="RegistrarCierreContableRevision" method="post">
+                            <input type="hidden" name="ServicioPrestadoId" id="ServicioPrestadoId" value="@Model.Id">
+                            <input type="hidden" name="FechaInicio" id="FechaInicio" value="@Model.FechaInicio">
+                            <input type="hidden" name="FechaFin" id="FechaFin" value="@Model.FechaFin">
+
+                            <div class="form-check">
+                                @foreach (var nombreCampo in Model.PagosPorServicioRealizados
+                               .SelectMany(p => p.CamposPago)
+                               .Where(c => !string.IsNullOrEmpty(c.NombreCampo))
+                               .Select(c => c.NombreCampo)
+                               .Distinct())
+                                {
+
+                                    <input class="form-check-input" type="checkbox" name="CamposRequeridos" value="@nombreCampo" id="@nombreCampo">
+                                    <label class="form-check-label" for="@nombreCampo">@nombreCampo</label>
+                                    <br />
+                                }
+                            </div>
+                            <button type="submit" class="btn btn-primary my-5" id="enviar-btn" disabled>Enviar</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <p>No se encontraron pagos realizados por el servicio.</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Agrega la biblioteca de DataTables -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/lib/DataTables-1.13.4/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>
+
+@section Scripts {
+    <script>
+        var campoRequerido = []; // Array inicialmente vacío para ir agregando los nombres de los campos requeridos
+
+        $('input[type="checkbox"]').change(function () {
+            actualizarCampoRequerido();
+            // Habilitar el botón "Enviar" si al menos un checkbox está marcado
+            if (campoRequerido.length > 0) {
+                $('#enviar-btn').prop('disabled', false);
+            } else {
+                $('#enviar-btn').prop('disabled', true);
+            }
+        });
+
+        function actualizarCampoRequerido() {
+            var nuevoCampoRequerido = [];
+            $('input[type="checkbox"]').each(function () {
+                if ($(this).is(':checked')) {
+                    nuevoCampoRequerido.push($(this).val());
+                }
+            });
+            campoRequerido = nuevoCampoRequerido;
+        }
+    </script>
+}

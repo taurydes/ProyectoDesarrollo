@@ -1,0 +1,304 @@
+﻿@model UCABPagaloTodoWeb.Models.ServicioModel
+
+@{
+    ViewData["Title"] = "RegistrarConfiguracionPago";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<br />
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-lg">
+                <div class="card-body p-8">
+
+                    <h2 class="card-title text-center mb-5">Configuración de Pago del Servicio</h2>
+
+                    <form asp-controller="ConfiguracionPago" asp-action="RegistrarConfiguracionPago" method="post">
+
+                        <input type="hidden" name="ServicioPrestadoId" id="ServicioPrestadoId" value="@Model.Id">
+                    
+                        <div id="campos-container">
+                           
+                            <div class="campo">
+                                <div class="row mb-3">
+                                    <div class="col-lg-3">
+                                        <label class="col-form-label">Nombre del Campo:</label>
+                                        <input type="text" required class="form-control"  readonly name="Campos[0].NombreCampo" value="Cedula">
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <label class="col-form-label">Tipo:</label>
+                                                <select class="form-control" name="Campos[0].Tipo">
+                                                    <option value="cedula" selected>Cédula</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <label class="col-form-label">Longitud:</label>
+                                                <input type="number" required min="0" class="form-control" name="Campos[0].Longitud" value="8" readonly>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <label class="col-form-label">Requerido:</label>
+                                                <div class="form-check">
+                                                    <input type="radio" class="form-check-input" name="Campos[0].Requerido" value="true" checked >
+                                                    <label class="form-check-label">Sí</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input type="radio" class="form-check-input" name="Campos[0].Requerido" value="false">
+                                                    <label class="form-check-label">No</label>
+                                                </div>
+                                            </div>
+                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="campo">
+                                <div class="row mb-3">
+                                    <div class="col-lg-3">
+                                        <label class="col-form-label">Nombre del Campo:</label>
+                                        <input type="text" required class="form-control" name="Campos[1].NombreCampo"  readonly value="Nombre">
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <label class="col-form-label">Tipo:</label>
+                                                <select class="form-control" readonly name="Campos[1].Tipo">
+                                                    <option value="text" selected>Texto</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <label class="col-form-label">Longitud:</label>
+                                                <input type="number" required min="0" class="form-control" name="Campos[1].Longitud" value="50" readonly>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <label class="col-form-label">Requerido:</label>
+                                                <div class="form-check">
+                                                    <input type="radio" class="form-check-input" name="Campos[1].Requerido" value="true" checked>
+                                                    <label class="form-check-label">Sí</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input type="radio" class="form-check-input" name="Campos[1].Requerido" value="false">
+                                                    <label class="form-check-label">No</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                             <div class="campo">
+                                <div class="row mb-3">
+                                    <div class="col-lg-3">
+                                        <label class="col-form-label">Nombre del Campo:</label>
+                                        <input type="text" required class="form-control" readonly name="Campos[2].NombreCampo" value="Monto">
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <label class="col-form-label">Tipo:</label>
+                                                <select class="form-control" readonly name="Campos[2].Tipo">
+                                                    <option value="number" selected>Número</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <label class="col-form-label">Longitud:</label>
+                                                <input type="number" required min="0" class="form-control" name="Campos[2].Longitud" value="8">
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <label class="col-form-label">Requerido:</label>
+                                                <div class="form-check">
+                                                    <input type="radio" class="form-check-input" name="Campos[2].Requerido" value="true" checked >
+                                                    <label class="form-check-label">Sí</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input type="radio" class="form-check-input" name="Campos[2].Requerido" value="false">
+                                                    <label class="form-check-label">No</label>
+                                                </div>
+                                            </div>
+                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                             <div class="campo">
+                                <div class="row mb-3">
+                                    <div class="col-lg-3">
+                                        <label class="col-form-label">Nombre del Campo:</label>
+                                        <input type="text" required class="form-control" name="Campos[3].NombreCampo"  readonly value="Descripción">
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <label class="col-form-label">Tipo:</label>
+                                                <select class="form-control" readonly name="Campos[3].Tipo">
+                                                    <option value="text" selected>Texto</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <label class="col-form-label">Longitud:</label>
+                                                <input type="number" required min="0" class="form-control" name="Campos[3].Longitud" value="15" readonly>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <label class="col-form-label">Requerido:</label>
+                                                <div class="form-check">
+                                                    <input type="radio" class="form-check-input" name="Campos[3].Requerido" value="true" checked>
+                                                    <label class="form-check-label">Sí</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input type="radio" class="form-check-input" name="Campos[3].Requerido" value="false">
+                                                    <label class="form-check-label">No</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Aquí se agregarán los campos dinámicamente -->
+                        </div>
+
+                        <br />
+                        <div class="row justify-content-center mt-3">
+                            <div class="col-lg-6">
+                                <button type="button" class="btn btn-success btn-lg w-100" id="agregar-campo">Agregar Campo</button>
+                            </div>
+                        </div>
+                      
+                        <br />
+                        <div class="row justify-content-center">
+                            <div class="col-lg-6">
+                                <button type="submit" class="btn btn-primary btn-lg w-100">Registrar Configuración</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Agrega la hoja de estilos de DataTables -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css" />
+<link rel="stylesheet" type="text/css" href="~/lib/DataTables-1.13.4/css/jquery.dataTables.min.css" />
+
+<!-- Agrega la biblioteca de DataTables -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/lib/DataTables-1.13.4/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var camposContainer = $("#campos-container"); // Contenedor de campos
+            var agregarCampoButton = $("#agregar-campo"); // Botón "Agregar Campo"
+
+            // Manejar evento de clic del botón "Agregar Campo"
+            var numCampos = camposContainer.children().length; // Número actual de campos
+
+            agregarCampoButton.click(function () {
+                // Generar HTML para un nuevo campo
+                var nuevoCampoHtml = '<div class="campo">' +
+                    '<div class="row mb-3">' +
+                    '<div class="col-lg-3">' +
+                    '<label class="col-form-label">Nombre del Campo:</label>' +
+                    '<input type="text" required class="form-control" name="Campos[' + numCampos + '].NombreCampo">' +
+                    '</div>' +
+                    '<div class="col-lg-9">' +
+                    '<div class="row">' +
+                    '<div class="col-lg-4">' +
+                    '<label class="col-form-label">Tipo:</label>' +
+                    '<select class="form-control" name="Campos[' + numCampos + '].Tipo">' +
+                    '<option value="text">Texto</option>' +
+                    '<option value="number">Número</option>' +
+                    '<option value="date">Fecha</option>' +
+                    '<option value="email">Correo Electrónico</option>' +
+                    '<option value="tel">Teléfono</option>' +
+                    '<option value="cedula">Cédula</option>' +
+                    '<option value="debito">Tarjeta de Debito</option>' +
+                    '<option value="credito">Tarjeta de Credito</option>' +
+                    '<option value="contrato">Número de Contrato</option>' +
+                    '</select>' +
+                    '</div>' +
+                    '<div class="col-lg-2">' +
+                    '<label class="col-form-label">Longitud:</label>' +
+                    '<input type="number" required  min="0" class="form-control" name="Campos[' + numCampos + '].Longitud">' +
+                    '</div>' +
+                    '<div class="col-lg-2">' +
+                    '<label class="col-form-label">Requerido:</label>' +
+                    '<div class="form-check">' +
+                    '<input type="radio" class="form-check-input" name="Campos[' + numCampos + '].Requerido" value="true">' +
+                    '<label class="form-check-label">Sí</label>' +
+                    '</div>' +
+                    '<div class="form-check">' +
+                    '<input type="radio" class="form-check-input" name="Campos[' + numCampos + '].Requerido" value="false" checked>' +
+                    '<label class="form-check-label">No</label>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="col-lg-3">' +
+                    '<label class="col-form-label">Opción</label>' +
+                    '<button type="button" class="btn btn-danger btn-sm eliminar-campo">Eliminar</button>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>';
+
+                // Agregar el nuevo campo al contenedor
+                camposContainer.append(nuevoCampoHtml);
+
+                // Incrementar el número de campos
+                numCampos++;
+
+                // Actualizar los nombres, índices y requeridos de los campos
+                actualizarNombresCampos();
+            });
+
+            //Agregar manejador de eventos para eliminar campos dinámicamente
+            camposContainer.on('click', '.eliminar-campo', function () {
+                $(this).closest('.campo').remove();
+
+                // Actualizar los nombres, índices y requeridos de los campos restantes
+                actualizarNombresCampos();
+            });
+
+            //Agregar manejador de eventos para actualizar el valor del atributo data-campo-requerido
+            camposContainer.on('change', 'input[type="radio"][name$=".Requerido"]', function () {
+                var campoRequerido = $(this).val();
+                $(this).attr('data-campo-requerido', campoRequerido);
+            });
+
+            // Función para actualizar los nombres, índices y requeridos de los campos de entrada
+            function actualizarNombresCampos() {
+                camposContainer.children('.campo').each(function (index, element) {
+                    var inputs = $(element).find('input, select');
+                    var nombreCampoInput = $(inputs[0]);
+                    var tipoCampoInput = $(inputs[1]);
+                    var longitudCampoInput = $(inputs[2]);
+                    var campoRequeridoRadio = $(inputs[3]).find('input[type="radio"]');
+
+                    // Actualizar el nombre y el índice del campo
+                    nombreCampoInput.attr('name', 'Campos[' + index + '].NombreCampo');
+                    tipoCampoInput.attr('name', 'Campos[' + index + '].Tipo');
+                    longitudCampoInput.attr('name', 'Campos[' + index + '].Longitud');
+                    campoRequeridoRadio.attr('name', 'Campos[' + index + '].Requerido');
+
+                    // Actualizar el valor del índice en los atributos data de los elementos
+                    nombreCampoInput.attr('data-campo-index', index);
+                    tipoCampoInput.attr('data-campo-index', index);
+                    longitudCampoInput.attr('data-campo-index', index);
+                    campoRequeridoRadio.attr('data-campo-index', index);
+
+                    // Actualizar el valor del atributo data-campo-requerido
+                    campoRequeridoRadio.on('change', function () {
+                        var campoRequerido = $(this).val();
+                        $(this).attr('data-campo-requerido', campoRequerido);
+                    });
+                });
+            }
+        });
+    </script>
+}

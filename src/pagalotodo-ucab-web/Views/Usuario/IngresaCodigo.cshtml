@@ -1,0 +1,74 @@
+﻿@model UCABPagaloTodoWeb.Models.RecuperaContrasenaModel
+
+@{
+    ViewData["Title"] = "IngresaCodigo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<br />
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-lg">
+                <div class="card-body p-5">
+
+                    <h1 class="text-center mb-4">Ingresa el código temporal</h1>
+                    <br/>
+                    <form method="post" action="@Url.Action("InterfazActualizar", "Usuario")" id="formCodigo">
+                        <input type="hidden" name="codigoRecuperacion" value="@Model.CodigoRecuperacion" />
+                        <input type="hidden" name="Correo" id="Correo" value="@Model.Correo" />
+                        <div class="form-group">
+                            <label for="codigo">Código:</label>
+                            <input type="text" class="form-control" id="codigo" maxlength="6" name="codigo" required placeholder="000000" pattern="[0-9]{6}" title="El código debe contener exactamente 6 caracteres numéricos" />
+                        </div>
+                        <br />
+                             <span>Cuando Ingrese el código válido se habilitará el botón para continuar</span>
+                        <br />
+                        <div class="text-center">
+                            <button type="submit" id="btnValidar" class="btn btn-primary" disabled>Continuar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script>
+        // Deshabilitar el botón de validación al cargar la página
+        document.getElementById('btnValidar').disabled = true;
+
+        // Manejador del evento input del campo de código
+        document.getElementById('codigo').addEventListener('input', function (event) {
+            var codigoRecuperacion = "@Model.CodigoRecuperacion"; // Obtener el código de recuperación desde el modelo de la página
+            var codigoIngresado = event.target.value; // Obtener el código ingresado por el usuario
+
+            // Habilitar o deshabilitar el botón de validación según el código ingresado
+            if (codigoIngresado === codigoRecuperacion) {
+                document.getElementById('btnValidar').disabled = false;
+            } else {
+                document.getElementById('btnValidar').disabled = true;
+            }
+        });
+
+        // Manejador del evento submit del formulario
+        document.getElementById('formCodigo').addEventListener('submit', function (event) {
+            var codigoRecuperacion ="@Model.CodigoRecuperacion"; // Obtener el código de recuperación desde el modelo de la página
+            var codigoIngresado = document.getElementById('codigo').value; // Obtener el código ingresado por el usuario
+
+            if (codigoIngresado === codigoRecuperacion) {
+                // Si el código es correcto, se envía el formulario y se verifica en el controlador
+                return true;
+            } else {
+                // Si el código es incorrecto, se muestra un mensaje de error y se cancela el envío del formulario
+                alert('El código es incorrecto. Por favor, inténtalo de nuevo.');
+                event.preventDefault();
+                return false;
+            }
+        });
+    </script>
+
+}

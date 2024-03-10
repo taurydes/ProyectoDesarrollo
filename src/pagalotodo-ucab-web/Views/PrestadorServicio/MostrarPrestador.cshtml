@@ -1,0 +1,203 @@
+﻿@model UCABPagaloTodoWeb.Models.PrestadorModel
+
+
+@{
+    ViewData["Title"] = "MostrarPrestador";
+}
+<div class="container">
+
+    <br />
+    <br />
+    <br />
+    <h1>Detalle del Cliente</h1>
+    <br />
+    <!-- INICIO DE TABLA DE DATOS -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">NOMBRE EMPRESA</th>
+                <th scope="col">RIF</th>
+                <th scope="col">NOMBRE DE USUARIO</th>
+                <th scope="col">CORREO</th>
+            </tr>
+        </thead>
+        @if (Model == null)
+        {
+            <tr>
+                <h2>
+                    No se encuentra el Prestador de Servicios.
+                </h2>
+            </tr>
+        }
+        else
+        {
+           <tr>
+                    <td class="id">
+                        @Html.DisplayFor(i => Model.NombreEmpresa)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(i => Model.Rif)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(i => Model.NombreUsuario)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(i => Model.Correo)
+                    </td>  
+           </tr>
+        
+        }
+
+    </table>
+    <br />
+    <h1>Servicos Prestados</h1>
+    <br />
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">NOMBRE</th>
+                <th scope="col">COSTO</th>
+                <th scope="col">DISPONIBILIDAD</th>
+                <th scope="col">TIPO PAGO</th>
+                <th scope="col">ESTATUS SERVICIO</th>
+                 @if (ViewContext.HttpContext.Request.Cookies["Token"] != null &&
+                 ViewContext.HttpContext.Request.Cookies["TokenRole"] == "ADMINISTRADOR")
+                 {
+                    <th ></th>
+                    <th ></th>
+                    <th scope="col">OPCIONES</th>
+                    <th ></th>
+                }
+                else
+                {
+                    <th></th>
+                    <th scope="col">OPCIONES</th>
+                    <th></th>
+                    <th></th>
+                }
+
+            </tr>
+        </thead>
+        @if (Model.ServiciosPrestados == null)
+        {
+            <tr>
+                <h2>
+                    No se encuentra el Consumidor de Servicios.
+                </h2>
+            </tr>
+        }
+        else
+        {
+            @if (Model.ServiciosPrestados == null)
+            {
+                <tr>
+                    <h2>
+                        El consumidor no ha Realizado Ningun Pago.
+                    </h2>
+                </tr>
+            }
+            else
+            {
+                @foreach (var item in Model.ServiciosPrestados)
+                {
+                    <tr>
+                        <td >
+                            @Html.DisplayFor(i => item.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(i => item.Costo) $
+                        </td>
+                        <td>
+                            @if (item.EstadoServicio == "pronto"){<span>Proximamente</span>}
+                            else{@Html.DisplayFor(i => item.EstadoServicio)}
+
+                        </td> 
+                        <td>
+                            @if (item.TipoPago)
+                            {
+                                <span>Por Confirmación</span>
+                            }
+                            else
+                            {
+                                <span>Directo</span>
+                            }
+                        </td>
+                      
+                            <td>
+                                @if (ViewContext.HttpContext.Request.Cookies["Token"] != null &&
+                                 ViewContext.HttpContext.Request.Cookies["TokenRole"] == "ADMINISTRADOR")
+                                 {
+                                @if (item.EstatusServicio)
+                                {
+                                    <span>Activo</span>
+                                }
+                                else
+                                {
+                                    <span>Inactivo</span>
+                                }
+                                 }
+                        </td>
+                                
+                        <td>
+                            <div class="col-md-6">
+                                <form class="mx-1 mx-md-4" asp-controller="Servicio" asp-action="ConsultarServicioPorID" asp-route-id="@item.Id" method="get">
+                                    <input type="hidden" name="tipo" value="1" />
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-info btn-sm">
+                                            Ver
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="col-md-6">
+                                <form class="mx-1 mx-md-4" asp-controller="Servicio" asp-action="ConsultarServicioPorID" asp-route-id="@item.Id" method="get">
+                                    <input type="hidden" name="tipo" value="3" />
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-success btn-sm">
+                                            Pagos
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </td>
+                        @if (ViewContext.HttpContext.Request.Cookies["Token"] != null &&
+                        ViewContext.HttpContext.Request.Cookies["TokenRole"] == "ADMINISTRADOR")
+                        {
+                            <td>
+                                <div class="col-md-6">
+                                    <form class="mx-1 mx-md-4" asp-controller="Servicio" asp-action="ConsultarServicioPorID" asp-route-id="@item.Id" method="get">
+                                        <input type="hidden" name="tipo" value="2" />
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-warning" btn-sm">
+                                                Editar
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="col-md-6">
+                                    <form class="mx-1 mx-md-4" asp-controller="Servicio" asp-action="EliminarServicio" asp-route-id="@item.Id" method="post">
+                                        <div class="form-group">
+                                            <input type="hidden" name="PrestadorServicioId" value="@item.PrestadorServicioId" />
+                                            <button type="submit" class="btn btn-danger delete-user btn-sm">
+                                                Eliminar
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </td>
+                        }
+                    </tr>
+                }
+            }
+        }
+    </table>
+    <br />
+    <br />
+    <br />
+</div>

@@ -1,0 +1,135 @@
+﻿@model List<UCABPagaloTodoWeb.Models.ServicioModel>
+
+@{
+    ViewData["Title"] = "MostrarServicios";
+}
+<div class="container">
+
+    <br />
+    <br />
+    <h1>Gestión Servicios Asociados</h1>
+    <br />
+
+    <!-- INICIO DE TABLA DE DATOS -->
+    <table class="table" id="muestraServicios">
+        <thead>
+            <tr>
+                <th scope="col">NOMBRE</th>
+                <th scope="col">COSTO</th>
+                <th scope="col">DISPONIBILIDAD</th>
+                <th scope="col">TIPO PAGO</th>
+                <th scope="col">INFORMACIÓN</th>
+            
+
+            </tr>
+        </thead>
+        @if (Model == null)
+        {
+            <tr>
+                <h2>
+                    No se encuentra el Servicio.
+                </h2>
+            </tr>
+        }
+        else
+        {
+            @if (Model == null)
+            {
+                <tr>
+                    <h2>
+                        El Servicio no ha recibido ningun Pago.
+                    </h2>
+                </tr>
+            }
+            else
+            {
+                @foreach (var item in Model)
+                { if(item.EstatusServicio){
+
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(i => item.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(i => item.Costo) $
+                        </td>
+                        <td>
+                            @if (item.EstadoServicio == "pronto")
+                            {
+                                <span>Proximamente</span>
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(i => item.EstadoServicio)
+                            }
+
+                        </td>
+                        <td>
+                            @if (item.TipoPago)
+                            {
+                                <span>Por Confirmación</span>
+                            }
+                            else
+                            {
+                                <span>Directo</span>
+                            }
+                        </td>
+                        <td>
+                            <div class="col-md-6">
+                                <form class="mx-1 mx-md-4" asp-controller="Servicio" asp-action="ConsultarServicioPorID" asp-route-id="@item.Id" method="get">
+                                    <input type="hidden" name="tipo" value="1" />
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-info btn-sm">
+                                            Información
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </td>
+                    </tr>
+                    }
+                }
+            }
+        }
+    </table>
+    <br />
+    <br />
+    <br />
+</div>
+<!-- Agrega la hoja de estilos de DataTables -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css" />
+<link rel="stylesheet" type="text/css" href="~/lib/DataTables-1.13.4/css/jquery.dataTables.min.css" />
+
+<!-- Agrega la biblioteca de DataTables -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/lib/DataTables-1.13.4/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>
+
+@section Scripts {
+
+    <script>
+        $(document).ready(function () {
+            $('#muestraServicios').DataTable({
+                searching: true,
+                ordering: true,
+                paging: true,
+                language: {
+                    search: "Filtrar registros:",
+                    lengthMenu: "Mostrar _MENU_ registros por página",
+                    zeroRecords: "No se encontraron registros",
+                    info: "Mostrando página _PAGE_ de _PAGES_",
+                    infoEmpty: "No hay registros disponibles",
+                    infoFiltered: "(filtrado de _MAX_ registros totales)"
+                }
+            });
+
+            $('#filter-form').submit(function (event) {
+                event.preventDefault();
+                var startDate = $('#start-date').val();
+                var endDate = $('#end-date').val();
+                $('#tabla-pagos').DataTable().columns(4).search(startDate + ' to ' + endDate).draw();
+            });
+        });
+    </script>
+}

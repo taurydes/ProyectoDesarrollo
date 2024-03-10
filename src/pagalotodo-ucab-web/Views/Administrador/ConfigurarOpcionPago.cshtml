@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewData["Title"] = "ConfigurarOpcionPago";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/css/ConfigurarOpcionPago.css"/>
+
+<br />
+
+<br />
+<section>
+    <div class="container vh-100">
+        <h1>Configurar opcion de pago</h1>
+        <br />
+        <br />
+        <div class="col-md-6 pt-4">
+
+            <div class="d-flex flex-row">
+
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Selecciona un servicio
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </div>
+
+                <div class="checks">
+                    <h4 class="mb-2">Campos a mostrar en el pago</h4>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Nombre
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Correo
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Referencia
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Informacion de la Tarjeta
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Autenticacion especial
+                        </label>
+                    </div>
+
+
+                    <button type="button" class="btn btn-success mt-4">Guardar</button>
+                </div>
+            
+            </div>
+
+       
+       
+        </div>
+    </div>
+</section>
+

@@ -1,0 +1,64 @@
+﻿@model UCABPagaloTodoWeb.Models.PagoModel
+
+@{
+    ViewData["Title"] = "ConfirmaPago";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-lg">
+                <div class="card-body p-5">
+
+                    <h2 class="card-title text-center mb-5">Confirmar Pago</h2>
+
+                    <form asp-controller="Pago" asp-action="RegistrarPago" method="post">
+
+                        <div class="row mb-3">
+                            <label for="NombreServicio" class="col-lg-3 col-form-label">Nombre Del Servicio:</label>
+                            <div class="col-lg-9">
+                                @*<input type="text" readonly class="form-control" id="NombreServicio" name="NombreServicio" value="@Model.NombreServicio">*@
+                                <input type="hidden" name="ServicioPrestadoId" id="ServicioPrestadoId" value="@Model.ServicioPrestadoId">
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="ConsumidorId" value="@ViewContext.HttpContext.Request.Cookies["TokenId"]">
+                          @*Importante Envía el Id del usuario que tiene la sesión activa*@
+                                             
+                        <div class="row mb-3">
+                            <label for="Monto" class="col-lg-3 col-form-label">Monto:</label>
+                            <div class="col-lg-9">
+                                @*<input type="number" readonly class="form-control" id="Monto" name="Monto" value="@Model.Monto">*@
+                            </div>
+                        </div>
+
+                     
+                        <div class="row mb-3">
+                            <label for="Nombre" class="col-lg-3 col-form-label">Referencia:</label>
+                            <div class="col-lg-9">
+                                @*<input type="text" readonly class="form-control" id="Nombre" name="Nombre" value="@Model.Nombre">*@
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="Referencia" class="col-lg-3 col-form-label">Numero referencia:</label>
+                            <div class="col-lg-9">
+                                <input type="text" readonly class="form-control" id="Referencia" name="Referencia" value="@Model.Referencia">
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center">
+                            <div class="col-lg-6">
+                                <button type="submit"  class="btn btn-primary btn-lg w-100">Realizar Pago</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

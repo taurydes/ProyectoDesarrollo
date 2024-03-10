@@ -1,0 +1,212 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\assets\**" />
+    <Content Remove="wwwroot\assets\**" />
+    <EmbeddedResource Remove="wwwroot\assets\**" />
+    <None Remove="wwwroot\assets\**" />
+  </ItemGroup>
+
+ 
+  <ItemGroup>
+    <PackageReference Include="EPPlus.Core.Extensions" Version="2.4.0" />
+    <PackageReference Include="jquery.datatables" Version="1.10.15" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.5" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.13" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\NewFolder\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Administrador\ConfigurarOpcionPago.cshtml" />
+    <None Include="Views\ArchivoConciliacion\ConfiguracionConciliacionAprobado.cshtml" />
+    <None Include="Views\ArchivoConciliacion\ConfiguracionConciliacion.cshtml" />
+    <None Include="Views\ArchivoConciliacion\SeleccionarRangoPagoAprobado.cshtml" />
+    <None Include="Views\ArchivoConciliacion\SeleccionarRangoPago.cshtml" />
+    <None Include="Views\ArchivoConciliacion\SubirArchivoConciliacion.cshtml" />
+    <None Include="Views\Conciliacion\ConfigurarArchivo.cshtml" />
+    <None Include="Views\ArchivoDeuda\SubirArchivoDeuda.cshtml" />
+    <None Include="Views\Campo\ActualizarCampo.cshtml" />
+    <None Include="Views\Campo\RegistrarCampo.cshtml" />
+    <None Include="Views\ConfiguracionPago\ConfirmaPago.cshtml" />
+    <None Include="Views\ConfiguracionPago\RegistrarConfiguracionPago.cshtml" />
+    <None Include="Views\Consumidor\ActualizarConsumidor.cshtml" />
+    <None Include="Views\Consumidor\MostrarConsumidor.cshtml" />
+    <None Include="Views\Consumidor\MostrarConsumidores.cshtml" />
+    <None Include="Views\Consumidor\RegistrarConsumidor.cshtml" />
+    <None Include="Views\Usuario\IngresaCodigo.cshtml" />
+    <None Include="Views\Home\Index.cshtml" />
+    <None Include="Views\Usuario\ActualizarContrasena.cshtml" />
+    <None Include="Views\Usuario\RecuperarContrasena.cshtml" />
+    <None Include="Views\Usuario\Login.cshtml" />
+    <None Include="Views\Home\Privacy.cshtml" />
+    <None Include="Views\Home\Team.cshtml" />
+    <None Include="Views\Pago\ConfirmaPago.cshtml" />
+    <None Include="Views\Pago\RealizarPago.cshtml" />
+    <None Include="Views\Pago\RealizarPagoConfirmacionNegada - Copia.cshtml" />
+    <None Include="Views\Pago\RealizarPagoConfirmacionNegada.cshtml" />
+    <None Include="Views\Pago\SeleccionarServicioPago.cshtml" />
+    <None Include="Views\PrestadorServicio\ActualizarPrestador.cshtml" />
+    <None Include="Views\PrestadorServicio\MostrarPrestador.cshtml" />
+    <None Include="Views\PrestadorServicio\MostrarPrestadores.cshtml" />
+    <None Include="Views\PrestadorServicio\RegistrarPrestador.cshtml" />
+    <None Include="Views\ServiciosPrestados\ActualizarServicio.cshtml" />
+    <None Include="Views\ServiciosPrestados\MostrarServicio.cshtml" />
+    <None Include="Views\ServiciosPrestados\MostrarServicioConfiguracionPagos.cshtml" />
+    <None Include="Views\ServiciosPrestados\MostrarServicioPagos.cshtml" />
+    <None Include="Views\ServiciosPrestados\MostrarServicios.cshtml" />
+    <None Include="Views\ServiciosPrestados\RegistrarServicio.cshtml" />
+    <None Include="Views\Shared\Error.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <None Include="Views\_ViewImports.cshtml" />
+    <None Include="Views\_ViewStart.cshtml" />
+    <None Include="wwwroot\css\style.css" />
+    <None Include="wwwroot\img\about.jpg" />
+    <None Include="wwwroot\img\apple-touch-icon.png" />
+    <None Include="wwwroot\img\blog\blog-1.jpg" />
+    <None Include="wwwroot\img\blog\blog-2.jpg" />
+    <None Include="wwwroot\img\blog\blog-3.jpg" />
+    <None Include="wwwroot\img\blog\blog-4.jpg" />
+    <None Include="wwwroot\img\blog\blog-author.jpg" />
+    <None Include="wwwroot\img\blog\blog-inside-post.jpg" />
+    <None Include="wwwroot\img\blog\blog-recent-1.jpg" />
+    <None Include="wwwroot\img\blog\blog-recent-2.jpg" />
+    <None Include="wwwroot\img\blog\blog-recent-3.jpg" />
+    <None Include="wwwroot\img\blog\blog-recent-4.jpg" />
+    <None Include="wwwroot\img\blog\blog-recent-5.jpg" />
+    <None Include="wwwroot\img\blog\comments-1.jpg" />
+    <None Include="wwwroot\img\blog\comments-2.jpg" />
+    <None Include="wwwroot\img\blog\comments-3.jpg" />
+    <None Include="wwwroot\img\blog\comments-4.jpg" />
+    <None Include="wwwroot\img\blog\comments-5.jpg" />
+    <None Include="wwwroot\img\blog\comments-6.jpg" />
+    <None Include="wwwroot\img\clients\client-1.png" />
+    <None Include="wwwroot\img\clients\client-2.png" />
+    <None Include="wwwroot\img\clients\client-3.png" />
+    <None Include="wwwroot\img\clients\client-4.png" />
+    <None Include="wwwroot\img\clients\client-5.png" />
+    <None Include="wwwroot\img\clients\client-6.png" />
+    <None Include="wwwroot\img\clients\client-7.png" />
+    <None Include="wwwroot\img\clients\client-8.png" />
+    <None Include="wwwroot\img\favicon.png" />
+    <None Include="wwwroot\img\portfolio\portfolio-1.jpg" />
+    <None Include="wwwroot\img\portfolio\portfolio-2.jpg" />
+    <None Include="wwwroot\img\portfolio\portfolio-3.jpg" />
+    <None Include="wwwroot\img\portfolio\portfolio-4.jpg" />
+    <None Include="wwwroot\img\portfolio\portfolio-5.jpg" />
+    <None Include="wwwroot\img\portfolio\portfolio-6.jpg" />
+    <None Include="wwwroot\img\portfolio\portfolio-7.jpg" />
+    <None Include="wwwroot\img\portfolio\portfolio-8.jpg" />
+    <None Include="wwwroot\img\portfolio\portfolio-9.jpg" />
+    <None Include="wwwroot\img\portfolio\portfolio-details-1.jpg" />
+    <None Include="wwwroot\img\portfolio\portfolio-details-2.jpg" />
+    <None Include="wwwroot\img\portfolio\portfolio-details-3.jpg" />
+    <None Include="wwwroot\img\slide\slide-1.jpg" />
+    <None Include="wwwroot\img\slide\slide-2.jpg" />
+    <None Include="wwwroot\img\slide\slide-3.jpg" />
+    <None Include="wwwroot\img\team\team-1.jpg" />
+    <None Include="wwwroot\img\team\team-2.jpg" />
+    <None Include="wwwroot\img\team\team-3.jpg" />
+    <None Include="wwwroot\img\testimonials\testimonials-1.jpg" />
+    <None Include="wwwroot\img\testimonials\testimonials-2.jpg" />
+    <None Include="wwwroot\img\testimonials\testimonials-3.jpg" />
+    <None Include="wwwroot\img\testimonials\testimonials-4.jpg" />
+    <None Include="wwwroot\img\testimonials\testimonials-5.jpg" />
+    <None Include="wwwroot\img\testimonials\testimonials-6.jpg" />
+    <None Include="wwwroot\js\main.js" />
+    <None Include="wwwroot\lib\vendor\animate.css\animate.compat.css" />
+    <None Include="wwwroot\lib\vendor\animate.css\animate.css" />
+    <None Include="wwwroot\lib\vendor\animate.css\animate.min.css" />
+    <None Include="wwwroot\lib\vendor\aos\aos.css" />
+    <None Include="wwwroot\lib\vendor\aos\aos.js" />
+    <None Include="wwwroot\lib\vendor\bootstrap-icons\bootstrap-icons.css" />
+    <None Include="wwwroot\lib\vendor\bootstrap-icons\bootstrap-icons.scss" />
+    <None Include="wwwroot\lib\vendor\bootstrap-icons\fonts\bootstrap-icons.woff" />
+    <None Include="wwwroot\lib\vendor\bootstrap-icons\fonts\bootstrap-icons.woff2" />
+    <None Include="wwwroot\lib\vendor\bootstrap\css\bootstrap-grid.css" />
+    <None Include="wwwroot\lib\vendor\bootstrap\css\bootstrap-grid.css.map" />
+    <None Include="wwwroot\lib\vendor\bootstrap\css\bootstrap-grid.min.css" />
+    <None Include="wwwroot\lib\vendor\bootstrap\css\bootstrap-grid.min.css.map" />
+    <None Include="wwwroot\lib\vendor\bootstrap\css\bootstrap-grid.rtl.css" />
+    <None Include="wwwroot\lib\vendor\bootstrap\css\bootstrap-grid.rtl.css.map" />
+    <None Include="wwwroot\lib\vendor\bootstrap\css\bootstrap-grid.rtl.min.css" />
+    <None Include="wwwroot\lib\vendor\bootstrap\css\bootstrap-grid.rtl.min.css.map" />
+    <None Include="wwwroot\lib\vendor\bootstrap\css\bootstrap-reboot.css" />
+    <None Include="wwwroot\lib\vendor\bootstrap\css\bootstrap-reboot.css.map" />
+    <None Include="wwwroot\lib\vendor\bootstrap\css\bootstrap-reboot.min.css" />
+    <None Include="wwwroot\lib\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <None Include="wwwroot\lib\vendor\bootstrap\css\bootstrap-reboot.rtl.css" />
+    <None Include="wwwroot\lib\vendor\bootstrap\css\bootstrap-reboot.rtl.css.map" />
+    <None Include="wwwroot\lib\vendor\bootstrap\css\bootstrap-reboot.rtl.min.css" />
+    <None Include="wwwroot\lib\vendor\bootstrap\css\bootstrap-reboot.rtl.min.css.map" />
+    <None Include="wwwroot\lib\vendor\bootstrap\css\bootstrap-utilities.css" />
+    <None Include="wwwroot\lib\vendor\bootstrap\css\bootstrap-utilities.css.map" />
+    <None Include="wwwroot\lib\vendor\bootstrap\css\bootstrap-utilities.min.css" />
+    <None Include="wwwroot\lib\vendor\bootstrap\css\bootstrap-utilities.min.css.map" />
+    <None Include="wwwroot\lib\vendor\bootstrap\css\bootstrap-utilities.rtl.css" />
+    <None Include="wwwroot\lib\vendor\bootstrap\css\bootstrap-utilities.rtl.css.map" />
+    <None Include="wwwroot\lib\vendor\bootstrap\css\bootstrap-utilities.rtl.min.css" />
+    <None Include="wwwroot\lib\vendor\bootstrap\css\bootstrap-utilities.rtl.min.css.map" />
+    <None Include="wwwroot\lib\vendor\bootstrap\css\bootstrap.css" />
+    <None Include="wwwroot\lib\vendor\bootstrap\css\bootstrap.css.map" />
+    <None Include="wwwroot\lib\vendor\bootstrap\css\bootstrap.min.css" />
+    <None Include="wwwroot\lib\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\lib\vendor\bootstrap\css\bootstrap.rtl.css" />
+    <None Include="wwwroot\lib\vendor\bootstrap\css\bootstrap.rtl.css.map" />
+    <None Include="wwwroot\lib\vendor\bootstrap\css\bootstrap.rtl.min.css" />
+    <None Include="wwwroot\lib\vendor\bootstrap\css\bootstrap.rtl.min.css.map" />
+    <None Include="wwwroot\lib\vendor\bootstrap\js\bootstrap.bundle.js" />
+    <None Include="wwwroot\lib\vendor\bootstrap\js\bootstrap.bundle.js.map" />
+    <None Include="wwwroot\lib\vendor\bootstrap\js\bootstrap.bundle.min.js" />
+    <None Include="wwwroot\lib\vendor\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <None Include="wwwroot\lib\vendor\bootstrap\js\bootstrap.esm.js" />
+    <None Include="wwwroot\lib\vendor\bootstrap\js\bootstrap.esm.js.map" />
+    <None Include="wwwroot\lib\vendor\bootstrap\js\bootstrap.esm.min.js" />
+    <None Include="wwwroot\lib\vendor\bootstrap\js\bootstrap.esm.min.js.map" />
+    <None Include="wwwroot\lib\vendor\bootstrap\js\bootstrap.js" />
+    <None Include="wwwroot\lib\vendor\bootstrap\js\bootstrap.js.map" />
+    <None Include="wwwroot\lib\vendor\bootstrap\js\bootstrap.min.js" />
+    <None Include="wwwroot\lib\vendor\bootstrap\js\bootstrap.min.js.map" />
+    <None Include="wwwroot\lib\vendor\boxicons\css\animations.css" />
+    <None Include="wwwroot\lib\vendor\boxicons\css\boxicons.css" />
+    <None Include="wwwroot\lib\vendor\boxicons\css\boxicons.min.css" />
+    <None Include="wwwroot\lib\vendor\boxicons\css\transformations.css" />
+    <None Include="wwwroot\lib\vendor\boxicons\fonts\boxicons.eot" />
+    <None Include="wwwroot\lib\vendor\boxicons\fonts\boxicons.svg" />
+    <None Include="wwwroot\lib\vendor\boxicons\fonts\boxicons.ttf" />
+    <None Include="wwwroot\lib\vendor\boxicons\fonts\boxicons.woff" />
+    <None Include="wwwroot\lib\vendor\boxicons\fonts\boxicons.woff2" />
+    <None Include="wwwroot\lib\vendor\glightbox\css\glightbox.css" />
+    <None Include="wwwroot\lib\vendor\glightbox\css\glightbox.min.css" />
+    <None Include="wwwroot\lib\vendor\glightbox\css\plyr.css" />
+    <None Include="wwwroot\lib\vendor\glightbox\css\plyr.min.css" />
+    <None Include="wwwroot\lib\vendor\glightbox\js\glightbox.js" />
+    <None Include="wwwroot\lib\vendor\glightbox\js\glightbox.min.js" />
+    <None Include="wwwroot\lib\vendor\isotope-layout\isotope.pkgd.js" />
+    <None Include="wwwroot\lib\vendor\isotope-layout\isotope.pkgd.min.js" />
+    <None Include="wwwroot\lib\vendor\php-email-form\validate.js" />
+    <None Include="wwwroot\lib\vendor\remixicon\remixicon.css" />
+    <None Include="wwwroot\lib\vendor\remixicon\remixicon.eot" />
+    <None Include="wwwroot\lib\vendor\remixicon\remixicon.less" />
+    <None Include="wwwroot\lib\vendor\remixicon\remixicon.svg" />
+    <None Include="wwwroot\lib\vendor\remixicon\remixicon.symbol.svg" />
+    <None Include="wwwroot\lib\vendor\remixicon\remixicon.ttf" />
+    <None Include="wwwroot\lib\vendor\remixicon\remixicon.woff" />
+    <None Include="wwwroot\lib\vendor\remixicon\remixicon.woff2" />
+    <None Include="wwwroot\lib\vendor\swiper\swiper-bundle.min.css" />
+    <None Include="wwwroot\lib\vendor\swiper\swiper-bundle.min.js" />
+    <None Include="wwwroot\lib\vendor\swiper\swiper-bundle.min.js.map" />
+    <None Include="wwwroot\lib\vendor\waypoints\noframework.waypoints.js" />
+    <None Include="wwwroot\scss\Readme.txt" />
+  </ItemGroup>
+
+</Project>

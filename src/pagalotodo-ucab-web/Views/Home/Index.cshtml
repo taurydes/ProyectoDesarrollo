@@ -1,0 +1,161 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<link href="~/css/style.css" rel="stylesheet">
+        <section id="hero">
+            <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+
+                <div class="carousel-inner" role="listbox">
+
+                    <!-- Slide 1 -->
+                    <div class="carousel-item active" style="background-image: url('@Url.Content("~/img/slide/slide-1.jpg")');">
+                        <div class="carousel-container">
+                            <div class="carousel-content animate__animated animate__fadeInUp">
+                                <h2>Bienvenido A tu Plataforma de Pago<span>Ucab</span></h2>
+                                <p>Este es una App de Pago de Servicios Realizada por los estudiantes de Ing Informatica de la UCAB </p>
+                                @if (ViewContext.HttpContext.Request.Cookies["Token"] is null)
+                                {
+                                    <div class="text-center"><a asp-area="" asp-controller="Consumidor" asp-action="InterfazRegistrar" class="btn-get-started">Registrate Ahora</a></div>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="carousel-item" style="background-image: url('@Url.Content("~/img/slide/slide-2.jpg")');">
+                        <div class="carousel-container">
+                            <div class="carousel-content animate__animated animate__fadeInUp">
+                                <h2>Bienvenido A tu Plataforma de Pago<span>Ucab</span></h2>
+                                <p>Este es una App de Pago de Servicios Realizada por los estudiantes de Ing Informatica de la UCAB </p>
+                                @if (ViewContext.HttpContext.Request.Cookies["Token"] is null)
+                                {
+                                    <div class="text-center"><a asp-area="" asp-controller="Consumidor" asp-action="InterfazRegistrar" class="btn-get-started">Registrate Ahora</a></div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3 -->
+                    <div class="carousel-item" style="background-image: url('@Url.Content("~/img/slide/slide-3.jpg")');">
+                        <div class="carousel-container">
+                            <div class="carousel-content animate__animated animate__fadeInUp">
+                                <h2>Bienvenido A tu Plataforma de Pago<span>Ucab</span></h2>
+                                <p>Este es una App de Pago de Servicios Realizada por los estudiantes de Ing Informatica de la UCAB </p>
+                                @if (ViewContext.HttpContext.Request.Cookies["Token"] is null)
+                                {
+                                    <div class="text-center"><a asp-area="" asp-controller="Consumidor" asp-action="InterfazRegistrar" class="btn-get-started">Registrate Ahora</a></div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+                </a>
+
+                <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+                    <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+                </a>
+
+                <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+
+            </div>
+        </section><!-- End Hero -->
+  
+     <main id="main">
+
+            <!-- ======= About Us Section ======= -->
+            <section id="about-us" class="about-us">
+                <div class="container" data-aos="fade-up">
+
+                    <div class="row content">
+                        <div class="col-lg-6" data-aos="fade-right">
+                            <h2>Realizar los Pagos de Tus servicios Preferidos es facilito con nosotros!!!</h2>
+                            <h3>Somos una Solución para tus Problemas</h3>
+                        </div>
+                        <div class="col-lg-6 pt-4 pt-lg-0" data-aos="fade-left">
+                            <p>
+                                En nuestra plataforma PagalotodoUcab, encontrarás una amplia variedad de servicios disponibles para que puedas pagarlos sin necesidad de salir de casa. Además, nuestro proceso de pago es muy sencillo y seguro, garantizándote la tranquilidad de que tus datos personales y financieros están protegidos.
+                            </p>
+                            <ul>
+                                <li><i class="ri-check-double-line"></i> Amplia variedad de servicios disponibles: Paga muchos servicios sin salir de casa.</li>
+                                <li><i class="ri-check-double-line"></i> Proceso de pago sencillo y seguro: Paga en pocos pasos y con total confianza.</li>
+                                <li><i class="ri-check-double-line"></i> Comodidad en tus pagos: Paga desde casa, sin filas ni desplazamientos.</li>
+                            </ul>
+                            <p class="fst-italic">
+                                No esperes más, únete a nuestra plataforma de pago de servicios y disfruta de la comodidad de realizar tus pagos desde cualquier lugar y en cualquier momento. ¡Te esperamos!
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </section><!-- End About Us Section -->
+            <!-- ======= Our Clients Section ======= -->
+            <section id="clients" class="clients">
+                <div class="container" data-aos="fade-up">
+
+                    <div class="section-title">
+                        <h2>Servicios Disponibles</h2>
+                    </div>
+
+                    <div class="row no-gutters clients-wrap clearfix" data-aos="fade-up">
+
+                        <div class="col-lg-3 col-md-4 col-6">
+                            <div class="client-logo">
+                                <img src="~/img/clients/client-1.png" class="img-fluid" alt="">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-4 col-6">
+                            <div class="client-logo">
+                                <img src="~/img/clients/client-2.png" class="img-fluid" alt="">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-4 col-6">
+                            <div class="client-logo">
+                                <img src="~/img/clients/client-3.png" class="img-fluid" alt="">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-4 col-6">
+                            <div class="client-logo">
+                                <img src="~/img/clients/client-4.png" class="img-fluid" alt="">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-4 col-6">
+                            <div class="client-logo">
+                                <img src="~/img/clients/client-5.png" class="img-fluid" alt="">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-4 col-6">
+                            <div class="client-logo">
+                                <img src="~/img/clients/client-6.png" class="img-fluid" alt="">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-4 col-6">
+                            <div class="client-logo">
+                                <img src="~/img/clients/client-7.png" class="img-fluid" alt="">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-4 col-6">
+                            <div class="client-logo">
+                                <img src="~/img/clients/client-8.png" class="img-fluid" alt="">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </section><!-- End Our Clients Section -->
+     </main><!-- End #main -->
+
+
+

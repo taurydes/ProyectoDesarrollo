@@ -1,0 +1,62 @@
+﻿@model UCABPagaloTodoWeb.Models.ServicioModel
+
+@{
+    ViewData["Title"] = "SeleccionarRangoPagoAprobado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-lg">
+                <div class="card-body p-5">
+
+                    <h2 class="card-title text-center mb-5">Seleccionar Rango</h2>
+
+                    <form asp-controller="ArchivoConciliacion" asp-action="ConfigurarCamposAprobado" method="post">
+                        <div class="row mb-3">
+                            <label for="ServicioPrestadoId" class="col-lg-3 col-form-label"> Servicio Asociada:</label>
+                            <div class="col-lg-9">
+                                <select name="ServicioPrestadoId" required id="ServicioPrestadoId" class="form-select dropdown-toggle" title="Debe elegir un Prestador de Servicio">
+                                    @if (Model == null)
+                                    {
+                                        <option selected>Error de conexión</option>
+                                    }
+                                    else
+                                    {
+                                      <option  selected value="@Model.Id"> @Model.Nombre</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="FechaInicio" class="col-lg-3 col-form-label">Fecha de inicio:</label>
+                            <div class="col-lg-9">
+                                <input type="date" name="FechaInicio" required class="form-control">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="FechaFin" class="col-lg-3 col-form-label">Fecha de fin:</label>
+                            <div class="col-lg-9">
+                                <input type="date" name="FechaFin" required class="form-control">
+                            </div>
+                        </div>
+
+                        @*importante envía el tipo de usuario que realiza la solicitud*@
+                        <input type="hidden" name="ServicioPrestadoId" value="@ViewContext.HttpContext.Request.Cookies["TokenId"]">
+                        
+
+                        <div class="row justify-content-center">
+                            <div class="col-lg-6">
+                                <button type="submit" class="btn btn-primary btn-lg w-100">Siguiente</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

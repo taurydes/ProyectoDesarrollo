@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "RecuperarContrasena";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section>
+    <div class="d-flex flex-column align-items-center justify-content-center pt-4">
+        <div class="text-center">
+            <img src="~/img/img1.jpg" class="w-50" />
+        </div>
+         <div class="w-50">
+            <form class="mx-1 mx-md-4" asp-action="RecuperarContrasena" method="post">
+                <div class="mb-3">
+                    <label for="Correo" class="form-label">Correo Electrónico</label>
+                    <input type="email" class="form-control" name="Correo" id="Correo" aria-describedby="emailHelp">
+                    <br />
+                    <div id="emailHelp" class="form-text">Ingrese su correo electrónico para recibir un código temporal que le permitirá restablecer su contraseña.</div>
+                </div>
+                <button type="submit" class="btn btn-primary">Siguiente</button>
+            </form>
+        </div>
+    </div>
+    <br />
+    <br />
+</section>

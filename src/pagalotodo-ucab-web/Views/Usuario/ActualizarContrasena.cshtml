@@ -1,0 +1,62 @@
+﻿@model UCABPagaloTodoWeb.Models.RecuperaContrasenaModel
+
+@{
+    ViewData["Title"] = "ActualizarContrasena";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="d-flex flex-column align-items-center justify-content-center pt-4">
+        <div class="text-center">
+            <img src="~/img/img1.jpg" class="w-50" />
+        </div>
+        <div class="w-50">
+            <form class="mx-1 mx-md-4" asp-action="ActualizarContrasena" method="post" id="formActualizarContrasena">
+                <div class="mb-3">
+                    <label for="Correo" class="form-label">Correo Electrónico</label>
+                    <input type="email" readonly class="form-control" name="Correo" id="Correo" value="@Model.Correo">
+                    <br />
+                </div>
+                <div class="mb-3">
+                    <label for="Clave" class="form-label">Nueva Contraseña</label>
+                    <input type="password" class="form-control" name="Clave" id="Clave" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$" title="La clave debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número.">
+                </div>
+                <div class="mb-3">
+                    <label for="ConfirmarClave" class="form-label">Confirmar Nueva Contraseña</label>
+                    <input type="password" class="form-control" name="ConfirmarClave" id="ConfirmarClave" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$" title="La clave debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número.">
+                    <div class="invalid-feedback">Las contraseñas no coinciden.</div>
+                </div>
+                <input type="hidden" name="Correo" value="@Model.Correo" />
+                <button type="submit" class="btn btn-primary" id="btnActualizarContrasena" disabled>Actualizar Contraseña</button>
+            </form>
+        </div>
+    </div>
+    <br />
+    <br />
+</div>
+@section Scripts {
+    <script>
+        const formActualizarContrasena = document.getElementById('formActualizarContrasena');
+        const claveInput = document.getElementById('Clave');
+        const confirmarClaveInput = document.getElementById('ConfirmarClave');
+        const confirmarClaveFeedback = confirmarClaveInput.nextElementSibling;
+        const btnActualizarContrasena = document.getElementById('btnActualizarContrasena');
+
+        formActualizarContrasena.addEventListener('submit', (event) => {
+            if (claveInput.value !== confirmarClaveInput.value) {
+                event.preventDefault();
+                confirmarClaveInput.classList.add('is-invalid');
+                confirmarClaveFeedback.style.display = 'block';
+            }
+        });
+
+        confirmarClaveInput.addEventListener('input', () => {
+            if (claveInput.value === confirmarClaveInput.value) {
+                confirmarClaveInput.classList.remove('is-invalid');
+                confirmarClaveFeedback.style.display = 'none';
+                btnActualizarContrasena.disabled = false;
+            } else {
+                btnActualizarContrasena.disabled = true;
+            }
+        });
+    </script>
+}

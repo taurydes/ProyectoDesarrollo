@@ -1,0 +1,213 @@
+﻿@model UCABPagaloTodoWeb.Models.ConsumidorModel
+@{
+        ViewData["Title"] = "MostrarConsumidor";
+}
+<div class="container">
+
+    <br />
+    <br />
+    <br />
+    <h1>Detalle del Cliente</h1>
+    <br />
+    <!-- INICIO DE TABLA DE DATOS -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">CEDULA</th>
+                <th scope="col">NOMBRE</th>
+                <th scope="col">APELLIDO</th>
+                <th scope="col">NOMBRE DE USUARIO</th>
+                <th scope="col">CORREO</th>
+                <th scope="col">TELEFONO</th>
+                @if(ViewContext.HttpContext.Request.Cookies["Token"] != null &&
+                ViewContext.HttpContext.Request.Cookies["TokenRole"] == "ADMINISTRADOR")
+                {
+                <th scope="col">ESTATUS</th>
+                <th scope="col">OPCIONES</th>
+                }
+
+            </tr>
+        </thead>
+        @if (Model == null)
+        {
+            <tr>
+                <h2>
+                    No se encuentra el Consumidor de Servicios.
+                </h2>
+            </tr>
+        }
+        else
+        {            <tr>
+                    <td class="id">
+                        @Html.DisplayFor(i => Model.Cedula)
+                    </td> 
+                    <td class="id">
+                        @Html.DisplayFor(i => Model.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(i => Model.Apellido)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(i => Model.NombreUsuario)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(i => Model.Correo)
+                    </td>  
+                    <td>
+                        @Html.DisplayFor(i => Model.Telefono)
+                    </td>
+
+               @if (ViewContext.HttpContext.Request.Cookies["Token"] != null &&
+               ViewContext.HttpContext.Request.Cookies["TokenRole"] == "ADMINISTRADOR")
+               {
+                    <td>
+                      @if (Model.EstatusCuenta)
+                      {
+                       <span>Activo</span>
+                      }
+                      else
+                      {
+                      <span>Inactivo</span>
+                      }
+
+                    </td>
+                    <td>
+                        <div class="col-md-6">
+                            <form class="mx-1 mx-md-4" asp-action="ConsultarConsumidorPorID" asp-route-id="@ViewContext.HttpContext.Request.Cookies["TokenId"]" method="get">
+                                <input type="hidden" name="tipo" value="2" />
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-warning" btn-sm">
+                                        Editar
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="col-md-6">
+                            <form class="mx-1 mx-md-4" asp-action="EliminarConsumidor" asp-route-id="@ViewContext.HttpContext.Request.Cookies["TokenId"]" method="post">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-danger delete-user btn-sm">
+                                        Eliminar
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </td>
+               }
+           </tr>       
+        }
+
+    </table>
+    <br />
+    <h1>Pagos Realizados</h1>
+    <br />
+    <br />
+    <table class="table" id="tabla-pagos">
+        @if (Model == null)
+        {
+            <tr>
+                <h2>
+                    No se encuentra el Consumidor de Servicios.
+                </h2>
+            </tr>
+        }
+        else
+        {
+            var nombresCamposUnicos = new List<string>();
+            foreach (var pago in Model.PagosRealizados.SelectMany(p => p.CamposPago))
+            {
+                if (!nombresCamposUnicos.Contains(pago.NombreCampo))
+                {
+                    nombresCamposUnicos.Add(pago.NombreCampo);
+                }
+            }
+    
+            @if (Model.PagosRealizados == null)
+            {
+                <tr>
+                    <h2>
+                        El consumidor no ha realizado ningún pago.
+                    </h2>
+                </tr>
+            }
+            else
+            {
+                <table class="table" id="tabla-campos">
+                    <thead>
+                        <tr>
+                            @foreach (var nombreCampo in nombresCamposUnicos)
+                            {
+                                <th>
+                                    @nombreCampo
+                                </th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var pago in Model.PagosRealizados)
+                        {
+                            <tr>
+                                @foreach (var nombreCampo in nombresCamposUnicos)
+                                {
+                                    var campoPago = pago.CamposPago.FirstOrDefault(c => c.NombreCampo == nombreCampo);
+                                    if (campoPago != null)
+                                    {
+                                        <td>
+                                            @campoPago.Valor
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td></td>
+                                    }
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        }
+    </table>
+    <br />
+    <br />
+    <br />
+</div>
+
+<!-- Agrega la hoja de estilos de DataTables -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css" />
+<link rel="stylesheet" type="text/css" href="~/lib/DataTables-1.13.4/css/jquery.dataTables.min.css" />
+
+<!-- Agrega la biblioteca de DataTables -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/lib/DataTables-1.13.4/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>
+
+@section Scripts {
+
+    <script>
+        $(document).ready(function () {
+            $('#tabla-campos').DataTable({
+                searching: true,
+                ordering: true,
+                paging: true,
+                language: {
+                    search: "Filtrar registros:",
+                    lengthMenu: "Mostrar _MENU_ registros por página",
+                    zeroRecords: "No se encontraron registros",
+                    info: "Mostrando página _PAGE_ de _PAGES_",
+                    infoEmpty: "No hay registros disponibles",
+                    infoFiltered: "(filtrado de _MAX_ registros totales)"
+                }
+            });
+
+            $('#filter-form').submit(function (event) {
+                event.preventDefault();
+                var startDate = $('#start-date').val();
+                var endDate = $('#end-date').val();
+                $('#tabla-pagos').DataTable().columns(4).search(startDate + ' to ' + endDate).draw();
+            });
+        });
+    </script>
+}

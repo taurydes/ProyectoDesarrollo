@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section>
+
+    <div class="d-flex flex-column align-items-center justify-content-center pt-4">
+
+        <div class="text-center">
+            <img src="~/img/img1.jpg" class="w-50" />
+        </div>
+        @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+        {
+            <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+        }
+        <div class="w-50">
+           
+            <form class="mx-1 mx-md-4" asp-action="Login" method="post">
+
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Nombre de Usuario</label>
+                    <input type="text" class="form-control" name="NombreUsuario" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text">Nunca compartiremos su correo electronico con nadie mas.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control" name="Clave" id="exampleInputPassword1">
+                </div>
+                <button type="submit" class="btn btn-primary">Ingresar</button>
+
+
+            </form>
+            <br/>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="InterfazRecuperar">¿Olvidó su contraseña?</a>
+        </div>
+    </div>
+    <br />
+    <br />
+
+
+
+</section>
+
+
+

@@ -1,0 +1,134 @@
+﻿@model List<UCABPagaloTodoWeb.Models.PrestadorModel>
+
+@{
+    ViewData["Title"] = "SeleccionarServicioPago";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-lg">
+                <div class="card-body p-5">
+
+                    <h2 class="card-title text-center mb-5">Seleccionar Servicio</h2>
+
+                    <form asp-controller="Pago" asp-action="InterfazCamposPago" method="post">
+                        <div class="row mb-3">
+                            <label for="PrestadorServicioId" class="col-lg-3 col-form-label">Empresa Asociada:</label>
+                            <div class="col-lg-9">
+                                <select name="PrestadorServicioId" required id="PrestadorServicioId" class="form-select dropdown-toggle" required title="Debe elegir un Prestador de Servicio">
+                                    <option value="" title="Debe elegir un Prestador de Servicio">Seleccione</option>
+                                    @if (Model == null)
+                                    {
+                                        <option selected>Error de conexión</option>
+                                    }
+                                    else
+                                    {
+                                        @foreach (var item in Model)
+                                        {
+                                            <option value="@item.Id"> @item.NombreEmpresa</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="ServicioPrestadoId" class="col-lg-3 col-form-label">Servicio Ofrecido:</label>
+                            <div class="col-lg-9">
+                                <select name="ServicioPrestadoId" required id="ServicioPrestadoId" class="form-select dropdown-toggle" required title="Debe elegir un Servicio Para Realizar el Pago">
+                                    <option value="" title="Debe elegir un Servicio Para Realizar el Pago">Seleccione</option>
+                                </select>
+                            </div>
+                        </div>
+                        <input type="hidden" name="NombreEmpresa" id="NombreEmpresa">
+                        <input type="hidden" name="ConfiguracionPagoId" id="ConfiguracionPagoId">
+                        <input type="hidden" name="ConsumidorId" value="@ViewContext.HttpContext.Request.Cookies["TokenId"]">
+                        <input type="hidden" name="Referencia" id="Referencia" value="@Guid.NewGuid()">
+                        <input type="hidden" name="TipoPago" id="TipoPago" value="">
+
+                        <div class="row justify-content-center">
+                            <div class="col-lg-6">
+                                <button type="submit" class="btn btn-primary btn-lg w-100">Siguiente</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Agrega la hoja de estilos de DataTables -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css" />
+<link rel="stylesheet" type="text/css" href="~/lib/DataTables-1.13.4/css/jquery.dataTables.min.css" />
+
+<!-- Agrega la biblioteca de DataTables -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/lib/DataTables-1.13.4/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#PrestadorServicioId').on('change', function () {
+                var selectedPrestadorServicioId = $(this).val();
+                if (selectedPrestadorServicioId !== '') {
+                    $.ajax({
+                        url: 'https://localhost:44339/prestadorservicio/' + selectedPrestadorServicioId,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (result) {
+                            var servicios = result.serviciosPrestados;
+                            var options = '';
+                            servicios.forEach(function (servicio) {
+                                if ((servicio.estatusServicio) && (servicio.estadoServicio == "activo")) {
+                                    options += '<option value="' + servicio.id + '" data-configuracion-pago-id="' + servicio.configuracionPagoId + '" data-tipo-pago="' + servicio.tipoPago + '" data-estatus-servicio="' + servicio.estatusServicio + '">' + servicio.nombre + '</option>';
+                                }
+                            });
+                            $('#ServicioPrestadoId').html(options);
+
+                            // Actualiza el valor del campo ConfiguracionPagoId
+                            var configuracionPagoId = $('#ServicioPrestadoId').find(':selected').data('configuracion-pago-id');
+                            $('#ConfiguracionPagoId').val(configuracionPagoId);
+                            console.log('CONFIGURACION***************', configuracionPagoId);
+
+                            // Actualiza el valor del campo TipoPago
+                            var tipoPago2 = $('#ServicioPrestadoId').find(':selected').data('tipo-pago');
+                            console.log('TIPO PAGO PRUEBA ***************', tipoPago2);
+                            $('#TipoPago').val(tipoPago2);
+                            console.log('TIPO PAGO***************', tipoPago2);
+
+                            // Actualiza el valor del campo EstatusServicio
+                            var estatusServicio = $('#ServicioPrestadoId').find(':selected').data('estatus-servicio');
+                            $('#EstatusServicio').val(estatusServicio);
+                            console.log('ESTATUS SERVICIO***************', estatusServicio);
+                        },
+                        error: function () {
+                            alert('Ocurrió un error al cargar los servicios del prestador de servicio seleccionado.');
+                        }
+                    });
+                } else {
+                    $('#ServicioPrestadoId').html('<option value="">Seleccione</option>');
+                }
+            });
+
+            $('#ServicioPrestadoId').on('change', function () {
+                var configuracionPagoId = $(this).find(':selected').data('configuracion-pago-id');
+                $('#ConfiguracionPagoId').val(configuracionPagoId);
+                console.log('CONFIGURACION ACTUALIZADA***************', configuracionPagoId);
+
+                // Actualiza el valor del campo TipoPago
+                var tipoPago = $(this).find(':selected').data('tipo-pago');
+                $('#TipoPago').val(tipoPago);
+                console.log('TIPO PAGO ACTUALIZADO***************', tipoPago);
+
+                // Actualiza el valor del campo EstatusServicio
+                var estatusServicio = $(this).find(':selected').data('estatus-servicio');
+                $('#EstatusServicio').val(estatusServicio);
+                console.log('ESTATUS SERVICIO ACTUALIZADO***************', estatusServicio);
+            });
+        });
+    </script>
+}

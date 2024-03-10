@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageSession xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="4.7.1221.0">
+  <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="0" minCyclomaticComplexity="0" maxCrapScore="0" minCrapScore="0" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="0" />
+  <Modules>
+    <Module skippedDueTo="Filter" hash="28-72-D6-94-CC-F5-8F-69-B9-A2-BB-1B-CE-FD-E4-C6-2D-D6-97-6B">
+      <ModulePath>C:\WINDOWS\Microsoft.Net\assembly\GAC_32\mscorlib\v4.0_4.0.0.0__b77a5c561934e089\mscorlib.dll</ModulePath>
+      <ModuleTime>2022-12-14T07:20:36Z</ModuleTime>
+      <ModuleName>mscorlib</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="E6-25-6A-01-59-68-8F-05-60-B0-15-DA-4D-96-7F-41-CB-F8-C9-BD">
+      <ModulePath>C:\Windows\Microsoft.NET\Framework\v4.0.30319\msbuild.exe</ModulePath>
+      <ModuleTime>2019-12-07T09:10:48.5088379Z</ModuleTime>
+      <ModuleName>MSBuild</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="5C-E4-B6-43-DD-49-9F-A8-D5-E4-3D-B6-96-F2-31-3D-BF-53-20-82">
+      <ModulePath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll</ModulePath>
+      <ModuleTime>2022-12-09T00:03:56.5989039Z</ModuleTime>
+      <ModuleName>System</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="C8-2E-64-82-9F-3E-E5-68-28-EC-A3-5B-05-18-0A-CC-70-C1-0D-04">
+      <ModulePath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Configuration\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Configuration.dll</ModulePath>
+      <ModuleTime>2020-06-05T05:04:05.335002Z</ModuleTime>
+      <ModuleName>System.Configuration</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="25-FB-04-44-B6-15-13-70-03-A7-2A-3A-5A-C1-15-B3-12-F5-6C-BE">
+      <ModulePath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\Microsoft.Build.Framework\v4.0_4.0.0.0__b03f5f7f11d50a3a\Microsoft.Build.Framework.dll</ModulePath>
+      <ModuleTime>2019-12-07T09:10:37.7585321Z</ModuleTime>
+      <ModuleName>Microsoft.Build.Framework</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="83-A0-53-55-36-18-94-33-9B-D7-FA-E1-DE-8B-1B-54-C4-F6-A4-A4">
+      <ModulePath>C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\Microsoft.Build\v4.0_4.0.0.0__b03f5f7f11d50a3a\Microsoft.Build.dll</ModulePath>
+      <ModuleTime>2019-12-07T09:10:37.6799566Z</ModuleTime>
+      <ModuleName>Microsoft.Build</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="39-57-00-37-6E-B4-A2-CB-20-67-6E-9C-7C-25-9B-E9-1B-D8-E6-C5">
+      <ModulePath>C:\Windows\Microsoft.NET\Framework\v4.0.30319\es\MSBuild.resources.dll</ModulePath>
+      <ModuleTime>2019-12-07T15:02:37.7251736Z</ModuleTime>
+      <ModuleName>MSBuild.resources</ModuleName>
+      <Classes />
+    </Module>
+  </Modules>
+</CoverageSession>

@@ -1,0 +1,123 @@
+﻿@model UCABPagaloTodoWeb.Models.ConfiguracionPagoModel
+
+@{
+    ViewData["Title"] = "RealizarPago";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-lg">
+                <div class="card-body p-5">
+
+                    <h2 class="card-title text-center mb-5">RealizarPago</h2>
+
+                    <form asp-controller="Pago" asp-action="RegistrarPago" method="post">
+                        @if(Model is not null)
+                        {
+                            
+                        
+                            @if (Model.Campos.Count > 0)
+                            {
+                                @foreach (var campo in Model.Campos)
+                                {
+                                    <div class="campo">
+                                        <div class="row mb-3">
+                                            <div class="col-lg-3 col-sm-4">
+                                                <label class="col-form-label">@campo.NombreCampo:</label>
+                                            </div>
+                                            <div class="col-lg-9 col-sm-8">
+                                                @{
+                                                    string pattern = "";
+                                                    string mensaje = "";
+                                                    string inputType = "text";
+                                                    int longitudMinima = 0;
+                                                    int longitudMaxima = campo.Longitud ?? 0;
+                                                    switch (campo.Tipo)
+                                                    {
+                                                        case "text":
+                                                            pattern = "[A-Za-z]+";
+                                                            mensaje = $"El campo solo acepta letras y debe tener una longitud máxima de: {longitudMaxima}";
+                                                            break;
+                                                        case "number":
+                                                            pattern = "[0-9]+";
+                                                            inputType = "number";
+                                                            mensaje = $"El campo solo acepta números y debe tener una longitud máxima de: {longitudMaxima}";
+                                                            break;
+                                                        case "date":
+                                                            inputType = "date";
+                                                            break;
+                                                        case "email":
+                                                            pattern = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[a-zA-Z]{2,}";
+                                                            inputType = "email";
+                                                            break;
+                                                        case "tel":
+                                                            longitudMinima = campo.Longitud ?? 7;
+                                                            longitudMaxima = campo.Longitud ?? 11;
+                                                            pattern = "[0-9]+";
+                                                            mensaje = $"El campo solo acepta números y debe tener una longitud mínima de {longitudMinima} y máxima de {longitudMaxima}";
+                                                            break;
+                                                        case "cedula":
+                                                            longitudMinima = 6;
+                                                            longitudMaxima = 8;
+                                                            pattern = "[0-9]+";
+                                                            mensaje = $"El campo solo acepta números y debe tener una longitud mínima de {longitudMinima} y máxima de {longitudMaxima}";
+                                                            break;
+                                                        case "contrato":
+                                                            longitudMinima = campo.Longitud ?? 4;
+                                                            longitudMaxima = campo.Longitud ?? 8;
+                                                            pattern = "[0-9]+";
+                                                            mensaje = $"El campo debe tener una longitud mínima de 1 y máxima de {longitudMaxima}";
+                                                            break;
+                                                        case "debito":
+                                                            longitudMinima = campo.Longitud ?? 13;
+                                                            longitudMaxima = campo.Longitud ?? 16;
+                                                            pattern = "[0-9]+";
+                                                            mensaje = $"El campo solo debe contener números y debe tener una longitud exacta de {longitudMinima}";
+                                                            break;
+                                                        case "credito":
+                                                            longitudMinima = campo.Longitud ?? 16;
+                                                            longitudMaxima = campo.Longitud ?? 19;
+                                                            pattern = "[0-9]+";
+                                                            mensaje = $"El campo solo debe contener números y debe tener una longitud exacta de {longitudMinima}";
+                                                            break;
+                                                    }
+                                                }
+                                                <input type="@inputType" required class="form-control" name="CamposPago[@Model.Campos.IndexOf(campo)].Valor"
+                                                       minlength="@longitudMinima" maxlength="@longitudMaxima" pattern="@pattern" title="@mensaje" @(campo.Requerido ? "required" : "")>
+                                                <input type="hidden" name="CamposPago[@Model.Campos.IndexOf(campo)].NombreCampo" value="@campo.NombreCampo">
+                                                <input type="hidden" name="CamposPago[@Model.Campos.IndexOf(campo)].Tipo" value="@campo.Tipo">
+                                                <input type="hidden" name="CamposPago[@Model.Campos.IndexOf(campo)].Longitud" value="@campo.Longitud">
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+                                <input type="hidden" name="NombreEmpresa" id="NombreEmpresa">
+                                <input type="hidden" name="ConsumidorId" value="@ViewContext.HttpContext.Request.Cookies["TokenId"]">
+                                <input type="hidden" name="ServicioPrestadoId" value="@Model.ServicioPrestadoId">
+                                <input type="hidden" name="Referencia" value="@Guid.NewGuid()">
+
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-6">
+                                        <button type="submit" class="btn btn-primary btn-lg w-100">Realizar Pago</button>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <h2 class="card-title text-center mb-5">No posee Configuracion de Pago</h2>
+                            }
+                        }else
+                        {
+                            <h2 class="card-title text-center mb-5">Error de Conexión</h2>
+                        }
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

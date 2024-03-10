@@ -1,0 +1,90 @@
+﻿@{
+    ViewData["Title"] = "RegistrarPrestador";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/css/RegisterConsumidor.css" />
+
+
+<section id="section" class="pb-4">
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-12 col-xl-11">
+                <div class="card text-black" id="fondo" style="border-radius: 25px;">
+                    <div class="card-body p-md-5">
+                        <div class="row justify-content-center">
+                            <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Registra Un Prestador de Servicio!</p>
+
+                                <form class="mx-1 mx-md-4" asp-action="RegistrarPrestador" method="post">
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="NombreEmpresa">Nombre Empresa</label>
+                                            <input type="text" id="NombreEmpresa" name="NombreEmpresa" class="form-control" placeholder="example UCAB" required pattern="[A-Za-záéíóúÁÉÍÓÚñÑ\s]{1,50}">
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="Rif">RIF</label>
+                                            <input type="text" id="Rif" name="Rif" class="form-control" placeholder="V123456789" required pattern="^[VEJGvejg]{1}\d{9}$" title="RIF típico en Venezuela tiene el formato X-123456789, donde  'X' representa una letra 'VEJG' y '1-9' representan dígitos numéricos.">
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="NombreUsuario">Nombre de usuario</label>
+                                            <input type="text" id="NombreUsuario" name="NombreUsuario" class="form-control" Placeholder="DesarrolloUcab" required pattern="^[a-zA-Z0-9_-]{3,15}$" title="El minimo de caracteres para el nombre es de 3">
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="Correo" placeholder="test@gmail.com">Email</label>
+                                            <input type="email" id="Correo" name="Correo" class="form-control" required >
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="Clave">Password</label>
+                                            <input type="password" id="Clave" name="Clave" class="form-control" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$" title="La clave debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-check d-flex justify-content-center mb-5">
+                                        <input class="form-check-input me-2" type="checkbox" value="" id="terms" />
+                                        <label class="form-check-label" for="terms">
+                                            Yo estoy de acuerdo con todos los <a href="#!">Terminos y condiciones</a>
+                                        </label>
+                                    </div>
+
+                                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                        <button type="submit" class="btn btn-primary btn-lg">Registrar</button>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                            <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                                     class="img-fluid" alt="Sample image">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+

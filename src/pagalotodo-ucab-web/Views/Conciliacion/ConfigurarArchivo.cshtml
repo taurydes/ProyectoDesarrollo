@@ -1,0 +1,55 @@
+﻿@model UCABPagaloTodoWeb.Models.ConfiguracionCamposConciliacionModel
+
+@{
+    ViewData["Title"] = "ConfigurarArchivo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-lg">
+                <div class="card-body p-5">
+
+                    <h2 class="card-title text-center mb-5">RealizarPago</h2>
+
+                    @*<form asp-controller="Pago" asp-action="RegistrarPago" method="post">
+
+                        @if (Model.Campos.Count > 0)
+                        {
+                            <div class="form-group">
+                                <label>Campos para conciliación:</label>
+                                @foreach (var campo in Model.Campos)
+                                {
+                                    <div>
+                                        <input type="checkbox" name="CamposConciliacion" value="@campo.NombreCampo" />
+                                        <label>@campo.NombreCampo</label>
+                                    </div>
+                                }
+                            </div>
+
+                            <input type="hidden" name="CamposPago" value="@Model.Campos" /> <!-- Eliminar este campo oculto -->
+
+                            <input type="hidden" name="NombreEmpresa" id="NombreEmpresa" />
+                            <input type="hidden" name="ConsumidorId" value="@ViewContext.HttpContext.Request.Cookies["TokenId"]" />
+                            <input type="hidden" name="ServicioPrestadoId" value="@Model.ServicioPrestadoId" />
+                            <input type="hidden" name="Referencia" value="@Guid.NewGuid()" />
+
+                            <div class="row justify-content-center">
+                                <div class="col-lg-6">
+                                    <button type="submit" class="btn btn-primary btn-lg w-100">Realizar Pago</button>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <h2 class="card-title text-center mb-5">No posee Configuracion de Pago</h2>
+                        }
+                    </form>*@
+                    <h1>Hola Mundo</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

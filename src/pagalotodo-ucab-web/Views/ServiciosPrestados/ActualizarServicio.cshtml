@@ -1,0 +1,108 @@
+﻿@model UCABPagaloTodoWeb.Models.ServicioModel
+
+@{
+    ViewData["Title"] = "ActualizarServicio";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/css/RegisterConsumidor.css" />
+
+
+<section id="section" class="pb-4">
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-12 col-xl-11">
+                <div class="card text-black" id="fondo" style="border-radius: 25px;">
+                    <div class="card-body p-md-5">
+                        <div class="row justify-content-center">
+                            <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Actualizar Servicio!</p>
+
+                                <form class="mx-1 mx-md-4" asp-action="ActualizarServicio" asp-route-id="@Model.Id" method="post">
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="Nombre">Nombre Servicio</label>
+                                            <input type="text" id="Nombre" name="Nombre" class="form-control" required pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{2,50}" title="El Nombre debe contener solo letras y tener una longitud de entre 2 y 50 caracteres."  value="@Model.Nombre"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="Descripcion">Descripcion</label>
+                                            <input type="text" id="Descripcion" name="Descripcion" class="form-control" required pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{4,150}" title="La descripción debe tener entre 4 y 100 caracteres y solo puede contener letras, números, guiones bajos y guiones." value="@Model.Descripcion"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="Costo">Costo $ </label>
+                                            <input type="number" id="Costo" name="Costo" class="form-control" required min="0" step="0.01" title="El Costo debe ser mayor a 0." value="@Model.Costo">
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="EstadoServicio">Estado del Servicio</label>
+                                            <select name="EstadoServicio" id="EstadoServicio" class="form-select dropdown-toggle custom-select" required title="Debe elegir una opción">
+                                                <option value="@Model.EstadoServicio" required title="Debe elegir una opción">@Model.EstadoServicio</option>
+                                                <option value="activo"> Activo </option>
+                                                <option value="inactivo"> Inactivo </option>
+                                                <option value="pronto"> Proximamente </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="TipoPago">TipoPago</label>
+                                            <select name="TipoPago" id="TipoPago" class="form-select dropdown-toggle" required title="Debe elegir una opción">
+                                                <option value="@Model.TipoPago"> 
+                                                    @if (@Model.TipoPago)
+                                                    {
+                                                        <span>Por Confirmación</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span>Directo</span>
+                                                    }
+                                                </option>
+
+                                                <option value="true"> Por Confirmación </option>
+                                                <option value="false"> Directo </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <input type="hidden" name="Id" value="@Model.Id" />@*Importante xq es el que envía el ID*@
+                                    <input type="hidden" name="PrestadorServicioId" value="@Model.PrestadorServicioId" /> @*Importante xq es el que envía el ID*@
+
+                                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                        <button type="submit" class="btn btn-primary btn-lg">Registrar</button>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                            <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                                     class="img-fluid" alt="Sample image">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
